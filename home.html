@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test-git</title>
+</head>
+
+<body>
+    <div>git 常用命令</div>
+    <div>
+        项目下添加.gitignore文件 添加需要忽略git提交的文件
+        git --version
+        检查git是否安装成功，查看git版本
+        git init
+        初始化一个仓库
+        git add .
+        将改动的所有文件放置到暂存区里
+        git add 文件名
+        例：git add deml.html
+        将改动的单个文件放置到暂存区里
+        git add 文件名1 文件名2
+        例：git add demo1.html demo2.html
+        将改动的多个文件放置到暂存区里，用空格分隔
+        git commit -m 'xxxxx'
+        把暂存区的代码提交到远程仓库，仓库就接收了从本地提交过来的代码
+        git push origin 分支名
+        推送至远程仓库
+        git status
+        查看本地项目有哪些改动的文件
+        git log
+
+        查看之前所有的提交记录，包括提交id、分支、作者、时间、提交内容
+        [图片]
+        git log --author='提交人名称'
+        例：git log --author='五月的夏天'
+        查看单个人提交的代码记录
+
+
+
+        git --version // 检查git是否安装成功，查看git版本
+        git init // 初始化一个仓库
+        git 项目分为三个区：本地、暂存区（等待提到远程仓库区）、远程仓库区
+        git add . 将改动的所有文件放置到暂存区里
+        git add 文件名 将改动的单个文件放置到暂存区里
+        git add 文件名1 文件名2 将改动的多个文件放置到暂存区里，用空格分隔
+        git commit -m 'xxxxx' 把暂存区的代码提交到远程仓库，仓库就接收了从本地提交过来的代码
+        git status 查看本地项目有哪些改动的文件
+        git log 查看之前所有的提交记录
+        包括提交id、分支、作者、时间、提交内容
+        [图片]
+        git log --author='五月的夏天' 查看单个人提交的代码记录
+
+        配置git用户名&邮箱
+        git config --global user.name '五月的夏天'
+        git config --global user.email '200000000qq.com'
+        查看是否配置成功
+        git config --global --list
+        [图片]
+
+        删除不需要的文件操作：
+        - 手动删除：将不需要的文件删除后，执行git add . git commit -m 'xxxxx'
+        - 命令删除：git rm 文件名，执行git add . git commit -m 'xxxxx'
+
+        文件重命名操作：
+        - 手动操作：直接给文件重命名，执行git add 新文件名 git rm 旧文件名
+        - 命令操作：git mv 旧文件名 新文件名
+
+        移动文件位置：
+        - git mv 要移动的文件名 移动到的文件夹位置，例：git mv demo.html home
+        移动文件位置并重命名：
+        - git mv 要移动的文件名 移动到的文件夹位置/新文件名，例：git mv demo2.html home/home.html
+
+        如何查看文件前后变化：
+        - 获取文件提交记录：git log --pretty=oneline 文件名，例：git log --pretty=oneline home/home.html
+        [图片]
+        查看某次提交具体修改内容：git show 提交ID，例：git show 439ed4d582dc784bfb8a0722c9c27d2c12ad4d9c
+        [图片]
+        第二种方式，直接查看某个文件具体修改的内容：git log -p 文件名
+        [图片]
+
+        将文件还原上一次提交操作状态：
+        针对文件少的情况下
+        找到文件改动：git diff
+        [图片]
+        然后进行手动删除。
+        第二种方式：
+        查看修改文件：git status
+        还原文件：git checkout -- 要还原的文件名，例：git checkout -- src/main.ts
+
+        不再追踪时如何实现撤销追踪操作：
+        文件追踪：如果把文件提交到暂存区，git就会实现对这个文件的追踪，执行git checkout -- 不会还原文件。
+        撤销文件追踪（撤销上次提交）：git reset HEAD 文件名，例：git reset HEAD -- src/main.ts
+
+
+        回到项目上一版本或指定版本时如何操作：
+        查看所有提交记录：git log
+        [图片]
+        回退到某个版本：git reset --hard HEAD^，一个^代表回退上个版本，^^代表回退2个版本，以此类推。
+        [图片]
+        回退到指定版本：git reset --hard 提交ID，需要拿到指定版本的提交id，id可以取前7、8位或全部，例：git reset --hard 1852b3d 或 git reset --hard
+        1852b3d4ebd93da5ea8f91a29a7d14d3b657b319
+
+        将指定文件回退到指定版本：
+        git checkout 提交ID -- main.ts，例：git checkout 1852b3d -- main.ts
+
+        推送至远程仓库：
+        git push origin master
+
+        想要给每个版本创建一个独特标签，做所有版本标签管理时如何操作：
+        如何创建标签：git tag 标签名，例：git tag v1.0 默认是追加在最新一次提交的代码上面
+        查看标签：git tag
+        [图片]
+        在指定commit添加标签：git tag 标签名 提交ID，例：git tag v0.5 9286adde
+        [图片]
+        删除已添加的标签：git tag -d 标签名，例：git tab -d v0.5
+        [图片]
+        创建的标签推送到远程仓库：git push origin 标签名，例：git push origin v1.0
+        [图片]
+        [图片]
+        分支：支线，需要完成某些功能的时候从主线剥离出来一些支线，由这些支线来完成一些单独的功能，互不影响，最后把所有的支线合并到主线上，被剥离出来的这些支线叫做分支。
+        好处：
+        1）可以方便多人协作开发，我开发我的功能，其他人开发他的功能，之间互不影响，最终合并到主线上。
+        2）在完成各自支线的任务时，不会影响到主线，既不会互相影响，又不会影响到主线。
+        创建分支：git branch 分支名，例：git branch dev
+        查看所有分支：git branch，*代表当前所在的分支，分支的排序是按照首字母顺序。
+        [图片]
+        切换分支：git checkout 分支名
+        [图片]
+        删除分支：git branch -d 分支名，注：不能删除当前所在的分支
+
+    </div>
+</body>
+
+</html>
