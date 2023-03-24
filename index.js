@@ -7,4 +7,4 @@
  * @FilePath: /test.git/index.js
  */
 console.log('index.js')
-console.log('main分支')
+console.log('master分支代码')
